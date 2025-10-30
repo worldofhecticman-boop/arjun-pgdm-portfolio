@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Arjun: Management & Corporate Strategy Profile</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    
+    <!-- Fonts: Use 'Orbitron' for sci-fi titles and 'Roboto Mono' for data text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Diagnostic Console Palette (Retained for visual complexity, but tone is in content) */
+            --bg-main: #01081a; 
+            --bg-module: #0c1a30; 
+            --text-main: #b8c9e5; 
+            --accent-green: #39ff14; 
+            --accent-red: #ff3914; 
+            --border-line: #1c3558;
+        }
+        
+        /* --- General & Background Styles --- */
+        html,body{margin:0;padding:0;scroll-behavior:smooth;}
+        body {
+            min-height:100vh;
+            font-family:'Roboto Mono', monospace;
+            background: var(--bg-main);
+            color: var(--text-main);
+            overflow-x:hidden;
+            position:relative;
+        }
+        
+        /* Interactive Starfield/Data Stream Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg, #01081a 0, #01081a 1px, #39ff1403 1px, #39ff1403 2px
+            ), radial-gradient(circle at 50% 50%, #1c355833 0%, transparent 80%);
+            z-index: 0;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: data-flow 60s linear infinite;
+        }
+        @keyframes data-flow {
+            from { background-position: 0 0; }
+            to { background-position: 0 100%; }
+        }
+
+        /* --- Navigation (Command Bar) --- */
+        nav {
+            position: sticky; top: 0; left: 0; width: 100vw; z-index:99;
+            background: rgba(1, 8, 26, 0.95);
+            backdrop-filter: blur(5px); 
+            box-shadow: 0 2px 15px var(--accent-green);
+            display: flex; align-items: center; justify-content: center; 
+            border-bottom: 3px solid var(--accent-red);
+            padding: 0.75rem 0;
+        }
+        .navlist {
+            display:flex;gap:1.5rem;padding:0;margin:0;list-style:none;position:relative;
+        }
+        .navitem {
+            font-family:'Orbitron', sans-serif;
+            font-size:1rem;font-weight:600;letter-spacing:.1em;
+            padding:10px 10px;
+            color:var(--text-main);background:none;border:none;cursor:pointer;
+            transition: all .2s;
+            outline:none;user-select:none;position:relative;
+        }
+        .navitem.active, .navitem:hover {
+            color: var(--accent-green);
+            text-shadow: 0 0 5px var(--accent-green);
+            transform: translateY(-2px);
+        }
+        .navitem:focus {
+             outline: 3px solid var(--accent-red);
+             outline-offset: 3px;
+        }
+        .nav-underline {
+            position:absolute;height:4px;background:var(--accent-red);bottom:-2px;left:0;
+            transition:all .4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            box-shadow: 0 0 15px var(--accent-red);
+            animation: pulse-red 2s infinite alternate;
+        }
+        @keyframes pulse-red {
+            0% { opacity: 0.7; box-shadow: 0 0 5px var(--accent-red); }
+            100% { opacity: 1; box-shadow: 0 0 15px var(--accent-red); }
+        }
+
+        /* --- Main Content & Card Styles --- */
+        .mainzone{
+            width:100vw;max-width:1100px;margin:0 auto;padding:80px 20px;display:flex;flex-direction:column;align-items:center;z-index:3;position:relative;
+        }
+        .sectioncard {
+            width: 100%; max-width: 900px; margin-bottom: 70px;
+            background: var(--bg-module); 
+            border-radius:0; 
+            border: 2px solid var(--border-line);
+            padding:50px; 
+            opacity:0; pointer-events:none; display:none; 
+            min-height:300px; position:relative;
+            box-shadow: 0 0 20px var(--accent-green) inset, 0 0 10px rgba(0,0,0,0.5);
+            /* Complex Transition: Card slices in using clip-path */
+            transition: all .8s cubic-bezier(0.23, 1, 0.32, 1.05);
+            transform: scale(0.8) translateY(100px);
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); 
+        }
+        .sectioncard.active {
+            opacity:1;display:block;pointer-events:auto;
+            transform: scale(1) translateY(0); 
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
+        }
+
+        /* --- Headings & Text (Diagnostic Readout) --- */
+        .heroname{
+            font-family:'Orbitron', sans-serif;font-size:3.8rem;font-weight:800;line-height:1.1;
+            color:var(--accent-green);margin-top:0;margin-bottom:15px;text-align:center;
+            text-shadow: 0 0 15px var(--accent-green);
+        }
+        .sectionname{
+            font-family:'Orbitron', sans-serif;font-size:2.2rem;font-weight:800;line-height:1.1;
+            color:var(--accent-red);margin-top:0;margin-bottom:25px;text-align:center;
+            border-bottom: 3px solid var(--accent-red);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        .herotxt {
+            font-size:1.2em; 
+            color:var(--text-main); margin: 0 auto; text-align:center;
+            font-weight: 400; line-height: 1.6; max-width: 700px; 
+        }
+        
+        /* --- Profile Photo (Circular Data Port) --- */
+        .profile-photo-wrap {
+            width: 180px; height: 180px; margin: 0 auto 30px auto; 
+            border-radius: 50%;
+            border: 5px solid var(--accent-green);
+            box-shadow: 0 0 20px var(--accent-green);
+            animation: data-pulse 5s infinite;
+        }
+        .profile-photo {
+            width: 180px; height: 180px; border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--bg-module);
+        }
+        @keyframes data-pulse {
+            0% { box-shadow: 0 0 10px var(--accent-green); }
+            50% { box-shadow: 0 0 30px var(--accent-green), 0 0 5px var(--accent-green) inset; }
+            100% { box-shadow: 0 0 10px var(--accent-green); }
+        }
+
+        /* --- Skill Tags (Module Chips) --- */
+        .skill-tags {
+            display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;
+            justify-content: center;
+        }
+        .skill-tag {
+            background: var(--border-line); 
+            color: var(--accent-green);
+            font-family: 'Roboto Mono', monospace; font-size: 0.9em;
+            padding: 10px 18px; border-radius: 2px; 
+            border: 1px solid var(--accent-green);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-tag:hover {
+            background: var(--accent-green); 
+            color: var(--bg-main); 
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--accent-green);
+            cursor: pointer;
+        }
+
+        /* --- Content & List Styling --- */
+        h3 {
+            font-family:'Orbitron', sans-serif; color:var(--accent-green); margin-top: 25px; margin-bottom: 8px; font-size: 1.15em;
+            border-bottom: 1px solid var(--border-line); padding-bottom: 5px;
+        }
+        .meta-txt {
+            color: var(--text-main); font-size: 0.95em; margin-bottom: 15px;
+        }
+        .description-txt {
+            color: var(--text-main); line-height: 1.6; margin-bottom: 15px;
+        }
+        ul.sectionlist li{
+            color:var(--text-main);
+            list-style: none;
+            padding-left: 15px; 
+            position: relative;
+        }
+        ul.sectionlist li::before {
+            content: "// >"; 
+            color: var(--accent-red);
+            position: absolute;
+            left: -20px; 
+        }
+        .contact-link {
+            color: var(--accent-green);
+            text-decoration: none;
+            text-shadow: 0 0 3px var(--accent-green);
+            transition: color 0.2s;
+        }
+        .contact-link:hover {
+            color: var(--accent-red);
+        }
+
+        /* --- Call to Action (System Access) --- */
+        .cv-link {
+            color: var(--bg-main);
+            background: var(--accent-red);
+            padding: 18px 50px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all .3s;
+            border: 2px solid var(--accent-red);
+            font-family:'Orbitron', sans-serif;
+            font-size:1.1em;
+            box-shadow: 0 0 20px var(--accent-red);
+        }
+        .cv-link:hover, .cv-link:focus {
+            background: var(--bg-main);
+            color: var(--accent-red);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 30px var(--accent-red);
+        }
+
+        /* --- Initial Loading Screen Mechanism --- */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-main);
+            color: var(--accent-green);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            font-family:'Roboto Mono', monospace;
+            font-size: 2em; z-index: 100;
+            transition: opacity 1s ease-out;
+        }
+        #boot-text {
+            white-space: pre-wrap;
+            animation: typing 3s steps(40, end) 1s forwards, blink-caret .75s step-end infinite;
+            overflow: hidden;
+            border-right: .15em solid var(--accent-green);
+            width: 0;
+            padding: 10px;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-green); } }
+        
+        /* --- Media Queries & Footer --- */
+        @media(max-width:768px){
+            .navlist{gap:10px;}
+            .navitem{padding:8px 10px; font-size: 0.8rem;}
+            .sectioncard{padding:25px;}
+            .heroname{font-size:2.5rem;}
+            .sectionname{font-size:1.5rem;}
+        }
+        
+        footer{
+            text-align:center;
+            color:var(--border-line);
+            font-size:0.9em;
+            padding:2em 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- INITIAL SYSTEM BOOT LOADER -->
+    <div id="loader">
+        <div id="boot-text"></div>
+    </div>
+    
+    <nav id="navbar" style="opacity:0; pointer-events:none;">
+        <ul class="navlist" id="navlist">
+            <!-- UPDATED NAV ITEMS (8 TOTAL) -->
+            <li class="navitem active" data-index="0" tabindex="0">STATUS</li>
+            <li class="navitem" data-index="1" tabindex="0">SCHEMA</li>
+            <li class="navitem" data-index="2" tabindex="0">MODULES</li>
+            <li class="navitem" data-index="3" tabindex="0">REFLECT</li> <!-- NEW -->
+            <li class="navitem" data-index="4" tabindex="0">EXECUTION</li>
+            <li class="navitem" data-index="5" tabindex="0">LOGS</li>
+            <li class="navitem" data-index="6" tabindex="0">TEAMS</li> <!-- NEW -->
+            <li class="navitem" data-index="7" tabindex="0">ACCESS</li>
+            <div class="nav-underline" id="navunderline"></div>
+        </ul>
+    </nav>
+    <div class="mainzone" id="maincontent" style="opacity:0; pointer-events:none;">
+        
+        <!-- 0. About (STATUS) - Moderated Content -->
+        <div class="sectioncard active">
+            <h1 class="heroname">SYSTEM STATUS: ARJUN</h1>
+            <div class="profile-photo-wrap" tabindex="0">
+                <img src="image.jpg" alt="Profile image of Arjun: Data Port Active" class="profile-photo" />
+            </div>
+            <p class="herotxt">
+                **INITIALIZING CORE FUNCTION:** PGDM Student at Muthoot Business School. My diverse interests, including Manga and music, reflect a highly **adaptable and quick-learning mind**. I manage my father's business operations alongside my studies, demonstrating a strong foundation in **practical business application**. I am characterized by high empathy, a strong work ethic, and a continuous drive for self-improvement.
+            </p>
+            <p class="herotxt" style="font-size:1.1em; margin-top:15px; color: var(--accent-red);">
+                > CORE COMPETENCY: Organizational Development & Corporate Relations
+            </p>
+        </div>
+        
+        <!-- 1. Education (SCHEMA) -->
+        <div class="sectioncard">
+            <h2 class="sectionname">SCHEMA: EDUCATION</h2>
+            
+            <h3>POST GRADUATE DIPLOMA IN MANAGEMENT (PGDM)</h3>
+            <p class="meta-txt">MUTHOOT BUSINESS SCHOOL [Current] // Focus: HR, Finance & Marketing</p>
+            <p class="description-txt">
+                **&lt;PROCESS&gt;** Strategic Management, Financial Analysis, and Organisational Change & Development.
+            </p>
+            
+            <h3>BACHELOR OF BUSINESS MANAGEMENT (BBM)</h3>
+            <p class="meta-txt">CHINMAYA COLLEGE OF ARTS, COMMERCE AND SCIENCE, THRIPPUNITHURA</p>
+            <p class="description-txt">
+                **&lt;PROCESS&gt;** Solid foundation in core business functions, commerce, and fundamental management principles.
+            </p>
+        </div>
+        
+        <!-- 2. Skills (MODULES) -->
+        <div class="sectioncard">
+            <h2 class="sectionname">MODULES: SKILLSET</h2>
+            
+            <h3>CORE MANAGEMENT & HR</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">HUMAN RESOURCE MANAGEMENT</span>
+                <span class="skill-tag">INDUSTRIAL RELATIONS</span>
+                <span class="skill-tag">ORGANISATIONAL CHANGE</span>
+                <span class="skill-tag">EMPLOYEE WELFARE</span>
+                <span class="skill-tag">FINANCIAL MANAGEMENT</span>
+            </div>
+            
+            <h3>MARKETING & STRATEGY</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">MARKETING PLANNING & PROMOTION</span>
+                <span class="skill-tag">MARKET RESEARCH & ANALYSIS</span>
+                <span class="skill-tag">CASE STUDY ANALYSIS</span>
+                <span class="skill-tag">EVENT MANAGEMENT</span>
+            </div>
+            
+            <h3>COMMUNICATION & TECHNICAL</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">PRESENTATION & PUBLIC SPEAKING</span>
+                <span class="skill-tag">TEAM COLLABORATION</span>
+                <span class="skill-tag">PROFESSIONAL WRITING</span>
+                <span class="skill-tag">MS-OFFICE & GOOGLE-WORKSPACE</span>
+                <span class="skill-tag">DATA-INTERPRETATION</span>
+            </div>
+        </div>
+
+        <!-- 3. Reflection (REFLECT) - NEW SECTION -->
+        <div class="sectioncard">
+            <h2 class="sectionname">REFLECTION: INSIGHTS</h2>
+            
+            <h3>EMOTIONAL INTELLIGENCE & LEADERSHIP</h3>
+            <p class="description-txt">
+                Through recent reflections, I’ve realized that both emotional intelligence and motivation deeply influence how I work and lead. From the emotional intelligence perspective, I learned that **empathy is one of my greatest strengths**—I naturally create harmony and support others’ ideas. However, I also noticed a gap: I often hesitate to voice my own opinions, fearing conflict. This made me understand that true leadership requires balancing empathy with **assertiveness** to make confident contributions.
+            </p>
+
+            <h3>MOTIVATION & PURPOSE</h3>
+            <p class="description-txt">
+                Similarly, exploring motivation theories, especially **Herzberg’s Two-Factor Theory**, helped me see that recognition, trust, and responsibility drive me far more than external rewards. My internship experience, where I was trusted with autonomy, showed me how **purpose and appreciation fuel high performance**. Conversely, a lack of recognition during group work revealed how poor communication and unclear roles can reduce engagement.
+            </p>
+
+            <p class="description-txt" style="color:var(--accent-green);">
+                **&lt;CONCLUSION&gt;** Effective leadership grows from inner motivation and emotional balance—feeling trusted, valued, and confident while creating the same environment for others. My goal is to build spaces where empathy and ownership coexist, turning motivation into a shared force that sustains team success.
+            </p>
+        </div>
+        
+        <!-- 4. Projects (EXECUTION) - Combined Internships -->
+        <div class="sectioncard">
+            <h2 class="sectionname">EXECUTION: INTERNSHIPS</h2>
+            
+            <h3>HR OPERATIONS, RECRUITMENT & PAYROLL</h3>
+            <p class="meta-txt">// FIRM: MUTHOOT FINANCE CORPORATE OFFICE, BANGLORE // DURATION: 2 MONTHS</p>
+            <p class="description-txt">
+                **&lt;FOCUS&gt;** Gained practical exposure to the end-to-end HR cycle, including operations, recruitment processes, and payroll execution, ensuring compliance and efficiency.
+            </p>
+            
+            <h3>EMPLOYEE WELFARE ACTIVITIES</h3>
+            <p class="meta-txt">// FIRM: INDEL MONEY CORPORATE OFFICE, KALAMASSERY // DURATION: 2 MONTHS</p>
+            <p class="description-txt">
+                **&lt;FOCUS&gt;** Focused on researching and implementing initiatives to enhance employee well-being and satisfaction, applying principles of Industrial Relations.
+            </p>
+        </div>
+        
+        <!-- 5. Achievements (LOGS) - Personal Attributes -->
+        <div class="sectioncard">
+            <h2 class="sectionname">LOGS: PERSONAL ATTRIBUTES</h2>
+            <ul class="sectionlist" style="list-style: none; padding-left: 30px;">
+                <li>**ATTRIB 1:** Adaptable and Quick Learner.</li>
+                <li>**ATTRIB 2:** Positive Attitude & Strong Work Ethics.</li>
+                <li>**ATTRIB 3:** Time Management & High Responsibility.</li>
+                <li>**ATTRIB 4:** Innovative and Detail-Oriented.</li>
+            </ul>
+        </div>
+        
+        <!-- 6. Learning Teams (TEAMS) - NEW SECTION -->
+        <div class="sectioncard">
+            <h2 class="sectionname">TEAM: VISIONARY VANGUARDS</h2>
+            
+            <h3>TEAM COMPOSITION & MEMBERS</h3>
+            <p class="meta-txt">Sachu K Binu, Alisha Vijay, Priyadarshan U, Akshay Deshmukh, Kristina, and Arjun A</p>
+            
+            <h3>DEFINITION: LEARNING TEAMS</h3>
+            <p class="description-txt">
+                Learning Teams are collaborative structures within an academic or professional setting designed to share knowledge, analyze complex scenarios, and collectively deepen understanding of core subjects. They serve as a mechanism for peer-to-peer teaching and constructive problem-solving.
+            </p>
+            
+            <h3>OBJECTIVES & ACHIEVEMENTS</h3>
+            <ul class="sectionlist" style="list-style: none; padding-left: 30px;">
+                <li>**OBJECTIVE:** To foster collaborative learning environments and enhance collective understanding of management principles.</li>
+                <li>**OBJECTIVE:** To simulate real-world team dynamics, improving coordination, negotiation, and conflict resolution skills.</li>
+                <li>**ACHIEVEMENT:** Successfully led complex **case study analyses**, consistently delivering high-quality, synthesized reports.</li>
+                <li>**ACHIEVEMENT:** Developed and presented advanced strategic models for market entry planning, demonstrating **strong analytical synergy**.</li>
+            </ul>
+        </div>
+        
+        <!-- 7. Contact (ACCESS) -->
+        <div class="sectioncard" style="text-align: center;">
+            <h2 class="sectionname">ACCESS: CONTACT</h2>
+            
+            <p class="description-txt">INITIATE CONNECTION PROTOCOL:</p>
+
+            <ul class="sectionlist" style="list-style: none; padding-left: 0;">
+                <li>EMAIL: <a href="mailto:arjun@corporate.com" class="contact-link" target="_blank">arjun@corporate.com</a></li>
+                <li>PHONE: <a href="tel:+919746120561" class="contact-link" target="_blank">+91 9746120561</a></li>
+                <li>LINKEDIN: <a href="https://www.linkedin.com/in/arjun-achu-0327bb350?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-link" target="_blank">LinkedIn Profile</a></li>
+            </ul>
+
+            <h3 style="text-align: center; margin-top: 40px; border-bottom: none; font-size: 1.2em;">&gt; DOWNLOAD FULL PROFILE</h3>
+            <a class="cv-link" href="arjun-cv.pdf" target="_blank">REQUEST ACCESS TOKEN (CV)</a>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Arjun. SYSTEM.TERMINATE(0);
+    </footer>
+    
+    <!-- --- JAVASCRIPT FOR COMPLEX SYSTEM LOGIC AND TRANSITIONS --- -->
+    <script>
+        // System Boot Sequence
+        const bootTextElement = document.getElementById('boot-text');
+        const loader = document.getElementById('loader');
+        const navbar = document.getElementById('navbar');
+        const mainContent = document.getElementById('maincontent');
+        
+        // Moderated Boot Sequence Text
+        const bootSequence = 
+`// BOOTING MANAGEMENT CONSOLE V4.3
+// STATUS: CORE DATA VALIDATING... [ OK ]
+// LOADING HR & FINANCE MODULES... [ OK ]
+// AUTHENTICATION: SUCCESSFUL
+// ACCESS GRANTED TO ARJUN PROFILE
+// INITIALIZING INTERACTIVE CONSOLE...`;
+
+        // Function to run the boot sequence
+        function runBootSequence() {
+            bootTextElement.innerText = bootSequence;
+            
+            // Wait for typing animation (4s total) then fade out loader
+            setTimeout(() => {
+                loader.style.opacity = '0';
+            }, 5500); 
+            
+            // Fade in main content
+            setTimeout(() => {
+                loader.style.display = 'none';
+                navbar.style.opacity = '1';
+                navbar.style.pointerEvents = 'auto';
+                mainContent.style.opacity = '1';
+                mainContent.style.pointerEvents = 'auto';
+                showSec(0); // Initialize first card display
+            }, 6500); 
+        }
+        
+        // Tabbed Navigation/Card System
+        const navitems = document.querySelectorAll('.navitem');
+        const cards = document.querySelectorAll('.sectioncard');
+        const underline = document.getElementById('navunderline');
+
+        function updateUnderline(activeElement) {
+            if (activeElement && underline) {
+                underline.style.width = activeElement.offsetWidth + 'px';
+                underline.style.left = activeElement.offsetLeft + 'px';
+            }
+        }
+
+        function showSec(idx) {
+            const activeNav = navitems[idx];
+
+            // 1. Update underline position
+            updateUnderline(activeNav);
+
+            // 2. Deactivate previous
+            navitems.forEach(item => item.classList.remove('active'));
+            cards.forEach(sec => sec.classList.remove('active'));
+            
+            // 3. Activate new after a minimal delay to allow the outgoing animation to start
+            setTimeout(() => {
+                activeNav.classList.add('active');
+                cards[idx].classList.add('active'); 
+            }, 100); 
+
+            window.scrollTo({top:0, left:0, behavior:"smooth"});
+        }
+
+        // --- Initialization ---
+        
+        // Bind events
+        navitems.forEach(item => {
+            const idx = parseInt(item.getAttribute('data-index'));
+            item.addEventListener('click', () => showSec(idx));
+            
+            // Accessibility: Enable keyboard navigation
+            item.addEventListener('keyup', (e) => { 
+                if (e.key === 'Enter' || e.key === ' ') {
+                    showSec(idx);
+                }
+            });
+        });
+
+        // Start the complex boot sequence immediately
+        runBootSequence();
+        
+        // Recalculate underline on resize
+        window.addEventListener('resize', () => {
+            const activeIndex = Array.from(navitems).findIndex(i => i.classList.contains('active'));
+            updateUnderline(navitems[activeIndex >= 0 ? activeIndex : 0]);
+        });
+    </script>
+</body>
+</html>
